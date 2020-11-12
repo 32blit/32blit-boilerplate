@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.8)
 
 set(32BLIT_PATH "../" CACHE PATH "Path to 32blit.cmake")
 set(PROJECT_NAME game)
-file(GLOB PROJECT_SOURCE "*.cpp" "*.hpp")
+set(PROJECT_SOURCE game.cpp game.hpp)
 
 # Build configuration; approach this with caution!
 project (${PROJECT_NAME})
