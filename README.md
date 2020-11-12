@@ -15,7 +15,6 @@ generate your own project.
 
 Edit the CMakeList.txt file to:
 
-* point to the directory containing 32blit.cmake
 * set the name of your project
 
 You should then be able to follow the usual build instructions.
