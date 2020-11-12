@@ -24,6 +24,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        path: main
 
     - name: Checkout 32Blit API
       uses: actions/checkout@v2
