@@ -26,8 +26,10 @@ jobs:
       RELEASE_FILE: ${{github.event.repository.name}}-${{github.event.release.tag_name}}-${{matrix.release-suffix}}
       
     steps:
+    - name: Checkout self
     - uses: actions/checkout@v2
       
+      name: Checkout 32blit
       uses: actions/checkout@v2
       with:
         repository: pimoroni/32blit-beta
