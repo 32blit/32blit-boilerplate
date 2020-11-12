@@ -5,12 +5,12 @@ code layout and asset pipeline, hopefully giving folk a starting point for
 any new projects.
 
 It's based on the original `template` project from the 
-(32Blit Beta)[https://github.com/pimoroni/32blit-beta], with added asset
+[32Blit Beta](https://github.com/pimoroni/32blit-beta), with added asset
 handling, and some tidying up to fit in with how I do things.
 
 ## Usage
 
-(Use this template)[https://github.com/ahnlak-blit32/32blit-boilerplate/generate] to
+[Use this template](https://github.com/ahnlak-blit32/32blit-boilerplate/generate) to
 generate your own project.
 
 Edit the CMakeList.txt file to:
