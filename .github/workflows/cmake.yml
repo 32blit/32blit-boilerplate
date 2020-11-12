@@ -19,6 +19,13 @@ jobs:
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
             apt-packages: libsdl2-dev libsdl2-image-dev python3-setuptools
 
+          - os: ubuntu-20.04
+            name: STM32
+            cache-key: stm32
+            release-suffix: STM32
+            cmake-args: -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/32blit/32blit.toolchain
+            apt-packages: gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib python3-setuptools
+
     runs-on: ${{matrix.os}}
 
     steps:
