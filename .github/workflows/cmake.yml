@@ -27,9 +27,21 @@ jobs:
       
     steps:
     - uses: actions/checkout@v2
+      
+      uses: actions/checkout@v2
       with:
         repository: pimoroni/32blit-beta
+        path: 32blit-beta
         
+    - name: Cache
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/.ccache
+        key: ccache-${{matrix.cache-key}}-${{github.ref}}-${{github.sha}}
+        restore-keys: |
+          ccache-${{matrix.cache-key}}-${{github.ref}}
+          ccache-${{matrix.cache-key}}-        
+              
     # Linux deps
     - name: Install deps
       if: runner.os == 'Linux'
