@@ -9,7 +9,7 @@ on:
   push:
   pull_request:
   release:
-    types: [created]
+    types: [published, created, edited]
 
 env:
   BUILD_TYPE: Release
