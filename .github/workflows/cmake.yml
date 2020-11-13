@@ -20,21 +20,21 @@ jobs:
         include:
           - os: ubuntu-20.04
             name: Linux
-            cache-key: linux
             release-suffix: LIN64
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
             apt-packages: libsdl2-dev libsdl2-image-dev python3-setuptools
 
           - os: ubuntu-20.04
             name: STM32
-            cache-key: stm32
             release-suffix: STM32
             cmake-args: -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/32blit/32blit.toolchain
             apt-packages: gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib python3-setuptools
 
           - os: macos-latest
             name: macOS
-            cache-key: macos
+            release-suffix: MACOS
+            cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
+            brew-packages: sdl2
 
     runs-on: ${{matrix.os}}
 
@@ -63,7 +63,7 @@ jobs:
     - name: Install MacOS deps
       if: runner.os == 'macOS'
       run: |
-        ci/install_sdl_macos.sh
+        brew install ${{matrix.apt-packages}}
         python3 -m pip install 32blit
 
     # Set up the build environment
