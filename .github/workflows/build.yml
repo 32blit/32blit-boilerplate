@@ -1,9 +1,9 @@
-# CMake Github Action, to run a test build on all targets (Linux, Blit, MacOS, Visual Studio)
+# Build Github Action, to run a test build on all targets (Linux, Blit, MacOS, Visual Studio)
 # when the project is checked in.
 #
 # Thanks in large part to the phenomenal examples of DaftFreak.
 
-name: CMake
+name: Build
 
 on: [push]
 
@@ -60,24 +60,27 @@ jobs:
         pip3 install 32blit
 
     # MacOS dependencies
-    - name: Install MacOS deps
+    - name: Install macOS deps
       if: runner.os == 'macOS'
       run: |
         brew install ${{matrix.brew-packages}}
         python3 -m pip install 32blit
 
-    # Set up the build environment
+    # Set up the cmake build environment
     - name: Create Build Environment
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       run: cmake -E make_directory ${{runner.workspace}}/main/build
 
     # Ask cmake to build the makefiles
     - name: Configure CMake
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       shell: bash
       working-directory: ${{runner.workspace}}/main/build
       run: cmake $GITHUB_WORKSPACE/main -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=`pwd` ${{matrix.cmake-args}}
 
     # And then run the build itself
     - name: Build
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       working-directory: ${{runner.workspace}}/main/build
       shell: bash
       run: |
