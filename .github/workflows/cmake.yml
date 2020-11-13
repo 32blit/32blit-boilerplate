@@ -34,7 +34,7 @@ jobs:
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
-            brew-packages: sdl2 sdl2-image
+            brew-packages: sdl2 sdl2_image
 
     runs-on: ${{matrix.os}}
 
