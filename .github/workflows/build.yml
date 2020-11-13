@@ -36,6 +36,11 @@ jobs:
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
             brew-packages: sdl2 sdl2_image
 
+          - os: windows-latest
+            name: Visual Studio
+            release-suffix: WIN64
+            cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
+
     runs-on: ${{matrix.os}}
 
     steps:
@@ -66,21 +71,26 @@ jobs:
         brew install ${{matrix.brew-packages}}
         python3 -m pip install 32blit
 
+    # Windows dependencies
+    - name: Install Windows deps
+      if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        main/ci/install_sdl_vs.sh
+        python -m pip install 32blit
+
     # Set up the cmake build environment
     - name: Create Build Environment
-      if: runner.os == 'Linux' || runner.os == 'macOS'
       run: cmake -E make_directory ${{runner.workspace}}/main/build
 
     # Ask cmake to build the makefiles
     - name: Configure CMake
-      if: runner.os == 'Linux' || runner.os == 'macOS'
       shell: bash
       working-directory: ${{runner.workspace}}/main/build
       run: cmake $GITHUB_WORKSPACE/main -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=`pwd` ${{matrix.cmake-args}}
 
     # And then run the build itself
     - name: Build
-      if: runner.os == 'Linux' || runner.os == 'macOS'
       working-directory: ${{runner.workspace}}/main/build
       shell: bash
       run: |
