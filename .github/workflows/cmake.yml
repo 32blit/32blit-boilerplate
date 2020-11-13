@@ -34,7 +34,7 @@ jobs:
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
-            brew-packages: sdl2
+            brew-packages: sdl2 sdl2-image
 
     runs-on: ${{matrix.os}}
 
@@ -63,7 +63,7 @@ jobs:
     - name: Install MacOS deps
       if: runner.os == 'macOS'
       run: |
-        brew install ${{matrix.apt-packages}}
+        brew install ${{matrix.brew-packages}}
         python3 -m pip install 32blit
 
     # Set up the build environment
