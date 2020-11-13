@@ -5,7 +5,11 @@
 
 name: Build
 
-on: [push]
+on:
+  push:
+  pull_request:
+  release:
+    types: [created]
 
 env:
   BUILD_TYPE: Release
@@ -42,6 +46,9 @@ jobs:
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
 
     runs-on: ${{matrix.os}}
+
+    env:
+      RELEASE_FILE: ${{github.event.repository.name}}-${{github.event.release.tag_name}}-${{matrix.release-suffix}}
 
     steps:
     # Check out the main repo
@@ -95,3 +102,37 @@ jobs:
       shell: bash
       run: |
         cmake --build . --config $BUILD_TYPE -j 2
+
+    # When it's a release, generate tar/zip files of the build
+    - name: Package Release
+      if: github.event_name == 'release' && matrix.release-suffix != ''
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      run: |
+        cmake --build . --target install
+        tar -zcf ${RELEASE_FILE}.tar.gz bin/
+        7z a ${RELEASE_FILE}.zip bin/*
+
+    # Push the tar file to the release
+    - name: Upload tar
+      if: github.event_name == 'release' && matrix.release-suffix != ''
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        asset_path: ${{runner.workspace}}/build/${{env.RELEASE_FILE}}.tar.gz
+        upload_url: ${{github.event.release.upload_url}}
+        asset_name: ${{env.RELEASE_FILE}}.tar.gz
+        asset_content_type: application/octet-stream #??
+
+    # Push the zip file to the release
+    - name: Upload zip
+      if: github.event_name == 'release' && matrix.release-suffix != ''
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        asset_path: ${{runner.workspace}}/build/${{env.RELEASE_FILE}}.zip
+        upload_url: ${{github.event.release.upload_url}}
+        asset_name: ${{env.RELEASE_FILE}}.zip
+        asset_content_type: application/zip
