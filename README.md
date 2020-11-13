@@ -1,6 +1,6 @@
 # 32Blit Boilerplate
 
-![CMake](https://github.com/ahnlak-blit32/32blit-boilerplate/workflows/CMake/badge.svg)
+![Build](https://github.com/ahnlak-blit32/32blit-boilerplate/workflows/Build/badge.svg)
 
 This is a basic template for starting 32blit projects. It shows the basic
 code layout and asset pipeline, hopefully giving folk a starting point for
