@@ -1,13 +1,19 @@
+# CMake Github Action, to run a test build on all targets (Linux, Blit, MacOS, Visual Studio)
+# when the project is checked in.
+#
+# Thanks in large part to the phenomenal examples of DaftFreak.
+
 name: CMake
 
 on: [push]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
+
   build:
+
     name: ${{matrix.name}}
     strategy:
       matrix:
@@ -26,35 +32,51 @@ jobs:
             cmake-args: -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/32blit/32blit.toolchain
             apt-packages: gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib python3-setuptools
 
+          - os: macos-latest
+            name: macOS
+            cache-key: macos
+
     runs-on: ${{matrix.os}}
 
     steps:
+    # Check out the main repo
     - name: Checkout
       uses: actions/checkout@v2
       with:
         path: main
 
+    # Check out the 32Blit API we build against
     - name: Checkout 32Blit API
       uses: actions/checkout@v2
       with:
         repository: pimoroni/32blit-beta
         path: 32blit
       
-    # Linux deps
-    - name: Install deps
+    # Linux dependencies
+    - name: Install Linux deps
       if: runner.os == 'Linux'
       run: |
         sudo apt update && sudo apt install ${{matrix.apt-packages}}
         pip3 install 32blit
-        
+
+    # MacOS dependencies
+    - name: Install MacOS deps
+      if: runner.os == 'macOS'
+      run: |
+        ci/install_sdl_macos.sh
+        python3 -m pip install 32blit
+
+    # Set up the build environment
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/main/build
 
+    # Ask cmake to build the makefiles
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}/main/build
       run: cmake $GITHUB_WORKSPACE/main -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=`pwd` ${{matrix.cmake-args}}
 
+    # And then run the build itself
     - name: Build
       working-directory: ${{runner.workspace}}/main/build
       shell: bash
