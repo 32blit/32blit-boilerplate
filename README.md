@@ -15,9 +15,9 @@ handling, and some tidying up to fit in with how I do things.
 [Use this template](https://github.com/ahnlak-blit32/32blit-boilerplate/generate) to
 generate your own project.
 
-Edit the CMakeList.txt file to:
-
-* set the name of your project
+* Edit the CMakeList.txt file to set the name of your project
+* Edit the metadata.yml file to set the information for your project
+* Write lots of super cool code!
 
 You should then be able to follow the usual build instructions.
 
