@@ -1,5 +1,5 @@
-# Build Github Action, to run a test build on all targets (Linux, Blit, MacOS, Visual Studio)
-# when the project is checked in.
+# Build Github Action, to run a test build on all targets
+# (Linux, Blit, MacOS, Visual Studio) when the project is checked in.
 #
 # Thanks in large part to the phenomenal examples of DaftFreak.
 
@@ -63,7 +63,7 @@ jobs:
       with:
         repository: pimoroni/32blit-beta
         path: 32blit
-      
+
     # Linux dependencies
     - name: Install Linux deps
       if: runner.os == 'Linux'
@@ -123,7 +123,7 @@ jobs:
         asset_path: ${{runner.workspace}}/build/${{env.RELEASE_FILE}}.tar.gz
         upload_url: ${{github.event.release.upload_url}}
         asset_name: ${{env.RELEASE_FILE}}.tar.gz
-        asset_content_type: application/octet-stream #??
+        asset_content_type: application/octet-stream
 
     # Push the zip file to the release
     - name: Upload zip
