@@ -9,7 +9,7 @@ on:
   push:
   pull_request:
   release:
-    types: [published, created, edited]
+    types: [created]
 
 env:
   BUILD_TYPE: Release
@@ -107,7 +107,7 @@ jobs:
     - name: Package Release
       if: github.event_name == 'release' && matrix.release-suffix != ''
       shell: bash
-      working-directory: ${{runner.workspace}}/build
+      working-directory: ${{runner.workspace}}/main/build
       run: |
         cmake --build . --target install
         tar -zcf ${RELEASE_FILE}.tar.gz bin/
@@ -120,7 +120,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        asset_path: ${{runner.workspace}}/build/${{env.RELEASE_FILE}}.tar.gz
+        asset_path: ${{runner.workspace}}/main/build/${{env.RELEASE_FILE}}.tar.gz
         upload_url: ${{github.event.release.upload_url}}
         asset_name: ${{env.RELEASE_FILE}}.tar.gz
         asset_content_type: application/octet-stream
@@ -132,7 +132,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        asset_path: ${{runner.workspace}}/build/${{env.RELEASE_FILE}}.zip
+        asset_path: ${{runner.workspace}}/main/build/${{env.RELEASE_FILE}}.zip
         upload_url: ${{github.event.release.upload_url}}
         asset_name: ${{env.RELEASE_FILE}}.zip
         asset_content_type: application/zip
