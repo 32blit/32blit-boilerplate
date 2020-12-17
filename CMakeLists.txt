@@ -6,6 +6,11 @@ set(32BLIT_PATH "../" CACHE PATH "Path to 32blit.cmake")
 set(PROJECT_SOURCE game.cpp game.hpp)
 
 # Build configuration; approach this with caution!
+if(MSVC)
+  add_compile_options("/W4" "/O2")
+else()
+  add_compile_options("-Wall" "-Wextra" "-Wdouble-promotion" "-Os")
+endif()
 if(NOT EXISTS ${32BLIT_PATH}/32blit.cmake)
   message(FATAL_ERROR "Define location of 32Blit API with -D32BLIT_PATH=<path to 32blit.cmake>")
 endif()
