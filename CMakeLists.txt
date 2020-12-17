@@ -7,7 +7,7 @@ set(PROJECT_SOURCE game.cpp game.hpp)
 
 # Build configuration; approach this with caution!
 if(MSVC)
-  add_compile_options("/W4" "/O2")
+  add_compile_options("/W4" "/wd4244" "/wd4324" "/O2")
 else()
   add_compile_options("-Wall" "-Wextra" "-Wdouble-promotion" "-Os")
 endif()
