@@ -7,9 +7,9 @@ set(PROJECT_SOURCE game.cpp game.hpp)
 
 # Build configuration; approach this with caution!
 if(MSVC)
-  add_compile_options("/W4" "/wd4244" "/wd4324" "/O2")
+  add_compile_options("/W4" "/wd4244" "/wd4324")
 else()
-  add_compile_options("-Wall" "-Wextra" "-Wdouble-promotion" "-Os")
+  add_compile_options("-Wall" "-Wextra" "-Wdouble-promotion")
 endif()
 if(NOT EXISTS ${32BLIT_PATH}/32blit.cmake)
   message(FATAL_ERROR "Define location of 32Blit API with -D32BLIT_PATH=<path to 32blit.cmake>")
