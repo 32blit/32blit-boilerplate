@@ -83,7 +83,6 @@ jobs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        main/ci/install_sdl_vs.sh
         python -m pip install 32blit
 
     # Set up the cmake build environment
