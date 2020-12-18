@@ -17,6 +17,7 @@ generate your own project.
 
 * Edit the CMakeList.txt file to set the name of your project
 * Edit the metadata.yml file to set the information for your project
+* Edit the LICENSE file to set your name on the license
 * Write lots of super cool code!
 
 You should then be able to follow the usual build instructions.
