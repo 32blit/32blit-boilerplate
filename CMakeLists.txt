@@ -16,9 +16,14 @@ if(NOT EXISTS ${32BLIT_PATH}/32blit.cmake)
   message(FATAL_ERROR "Define location of 32Blit API with -D32BLIT_PATH=<path to 32blit.cmake>")
 endif()
 include (${32BLIT_PATH}/32blit.cmake)
-install (FILES ${PROJECT_DISTRIBS} DESTINATION .)
+
 blit_executable (${PROJECT_NAME} ${PROJECT_SOURCE})
 blit_assets_yaml (${PROJECT_NAME} assets.yml)
 blit_metadata (${PROJECT_NAME} metadata.yml)
 add_custom_target (flash DEPENDS ${PROJECT_NAME}.flash)
 
+# setup release packages
+install (FILES ${PROJECT_DISTRIBS} DESTINATION .)
+set (CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
+set (CPACK_GENERATOR "ZIP" "TGZ")
+include (CPack)
