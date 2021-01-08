@@ -1,0 +1,6 @@
+[
+  {
+    "name": "32blit",
+    "toolchainFile": "${env:PATH_32BLIT}/32blit.toolchain"
+  }
+]

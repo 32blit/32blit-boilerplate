@@ -1,0 +1,5 @@
+{
+    "cmake.configureSettings": {
+        "32BLIT_PATH": "${env:PATH_32BLIT}"
+    }
+}
