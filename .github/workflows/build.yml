@@ -26,7 +26,7 @@ jobs:
             name: Linux
             release-suffix: LIN64
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
-            apt-packages: libsdl2-dev libsdl2-image-dev python3-setuptools
+            apt-packages: libsdl2-dev libsdl2-image-dev libsdl2-net-dev python3-setuptools
 
           - os: ubuntu-20.04
             name: STM32
@@ -38,7 +38,7 @@ jobs:
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_PATH=$GITHUB_WORKSPACE/32blit
-            brew-packages: sdl2 sdl2_image
+            brew-packages: sdl2 sdl2_image sdl2_net
 
           - os: windows-latest
             name: Visual Studio
