@@ -1,0 +1,6 @@
+{
+    "cmake.configureSettings": {
+        "32BLIT_PATH": "${env:PATH_32BLIT}"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+}
