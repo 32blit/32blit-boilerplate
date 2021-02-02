@@ -1,5 +1,5 @@
 # Basic parameters; check that these match your project / environment
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.9)
 
 project(game)
 set(32BLIT_PATH "../" CACHE PATH "Path to 32blit.cmake")
