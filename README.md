@@ -22,3 +22,12 @@ generate your own project.
 
 You should then be able to follow the usual build instructions.
 
+For local builds this is:
+```
+mkdir build
+cd build
+cmake -D32BLIT_PATH=/path/to/32blit/ ..
+```
+
+Platform/Editor specific insctuctions [can be found in the main 32blit repo](https://github.com/pimoroni/32blit-beta#more-docs)
+(For Visual Studio, you should follow the "Option 2" instructions, as the boilerplate does not contain a solution file)
