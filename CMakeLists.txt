@@ -4,9 +4,6 @@ cmake_minimum_required(VERSION 3.9)
 # Replace "game" with a name for your project (this is used the name of the output)
 project(game)
 
-# This is the default value for 32BLIT_PATH, usually you would set this through -D32BLIT_PATH=the/path, but you can change the default here for convenience
-set(32BLIT_PATH "../" CACHE PATH "Path to the directory containing 32blit.cmake")
-
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE game.cpp game.hpp)
 
@@ -19,10 +16,8 @@ if(MSVC)
 else()
   add_compile_options("-Wall" "-Wextra" "-Wdouble-promotion" "-Wno-unused-parameter")
 endif()
-if(NOT EXISTS ${32BLIT_PATH}/32blit.cmake)
-  message(FATAL_ERROR "Define location of 32Blit API with -D32BLIT_PATH=<path to 32blit.cmake>")
-endif()
-include (${32BLIT_PATH}/32blit.cmake)
+
+find_package (32BLIT CONFIG REQUIRED PATHS ../32blit-sdk)
 
 blit_executable (${PROJECT_NAME} ${PROJECT_SOURCE})
 blit_assets_yaml (${PROJECT_NAME} assets.yml)
