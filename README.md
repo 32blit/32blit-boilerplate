@@ -26,7 +26,7 @@ For local builds this is:
 ```
 mkdir build
 cd build
-cmake -D32BLIT_PATH=/path/to/32blit/ ..
+cmake -D32BLIT_DIR=/path/to/32blit-sdk/ ..
 ```
 
 Platform/Editor specific insctuctions [can be found in the main 32blit repo](https://github.com/pimoroni/32blit-beta#more-docs)
