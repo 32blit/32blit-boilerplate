@@ -108,7 +108,7 @@ jobs:
       shell: bash
       working-directory: ${{runner.workspace}}/main/build
       run: |
-        cmake --build . --target package
+        cmake --build . --config $BUILD_TYPE --target package
 
     # Push the tar file to the release
     - name: Upload tar
