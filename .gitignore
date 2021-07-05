@@ -1,3 +1,2 @@
 build/
-build.em/
-build.stm32/
+build.*/
