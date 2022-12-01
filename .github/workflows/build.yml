@@ -64,13 +64,13 @@ jobs:
     steps:
     # Check out the main repo
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: main
 
     # Check out the 32Blit API we build against
     - name: Checkout 32Blit API
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: 32blit/32blit-sdk
         path: 32blit-sdk
