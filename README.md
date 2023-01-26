@@ -7,7 +7,7 @@ code layout and asset pipeline, hopefully giving folk a starting point for
 any new projects.
 
 It's based on the original `template` project from the 
-[32Blit Beta](https://github.com/pimoroni/32blit-beta), with added asset
+[32Blit SDK](https://github.com/32blit/32blit-sdk), with added asset
 handling, and some tidying up to fit in with how I do things.
 
 ## Usage
@@ -29,5 +29,5 @@ cd build
 cmake -D32BLIT_DIR=/path/to/32blit-sdk/ ..
 ```
 
-Platform/Editor specific insctuctions [can be found in the main 32blit repo](https://github.com/pimoroni/32blit-beta#you-will-need)
+Platform/Editor specific insctuctions [can be found in the main 32blit repo](https://github.com/32blit/32blit-sdk#you-will-need)
 (For Visual Studio, you should follow the "Option 2" instructions, as the boilerplate does not contain a solution file)
