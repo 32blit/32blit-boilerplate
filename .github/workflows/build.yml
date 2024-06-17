@@ -49,7 +49,7 @@ jobs:
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
-            brew-packages: sdl2 sdl2_image sdl2_net
+            brew-packages: sdl2 sdl2_image sdl2_net pipx
 
           - os: windows-latest
             name: Visual Studio
@@ -87,7 +87,7 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew install ${{matrix.brew-packages}}
-        python3 -m pip install 32blit
+        pipx install 32blit
 
     # Windows dependencies
     - name: Install Windows deps
