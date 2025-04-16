@@ -1,6 +1,10 @@
 # Basic parameters; check that these match your project / environment
 cmake_minimum_required(VERSION 3.9)
 
+# If it's a pico build, include the necessary cmake files.
+# This has to be called before project(game)
+include(${32BLIT_DIR}/32blit-pico/sdk_import.cmake OPTIONAL)
+
 # Replace "game" with a name for your project (this is used the name of the output)
 project(game)
 
