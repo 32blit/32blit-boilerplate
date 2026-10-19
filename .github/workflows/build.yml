@@ -87,14 +87,14 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew install ${{matrix.brew-packages}}
-        pipx install 32blit
+        pipx install --preinstall "bitstring<5.0" 32blit
 
     # Windows dependencies
     - name: Install Windows deps
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        python -m pip install 32blit
+        python -m pip install 32blit "bitstring<5.0"
 
     # Emscripten SDK setup
     - name: Setup Emscripten cache
